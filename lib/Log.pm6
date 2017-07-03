@@ -65,6 +65,16 @@ multi method FALLBACK(Str $name where /^is\-.+$/, |args) {
     return False;
 }
 
+method clone() {
+    return self.new(
+        level   => self.level,
+        pattern => self.pattern,
+        output  => self.output,
+        ndc     => Log::NDC.new(|self.ndc.Array),
+        mdc     => Log::MDC.new(|self.mdc.Hash),
+    );
+}
+
 method !get-level(Str $level is copy) {
     $level = $level.uc;
     my $exists = Level.enums.first({ .key eq $level });
