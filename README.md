@@ -23,7 +23,6 @@ sub MAIN() {
     $log.ndc.push('xxx'); # add a value to the stack
     $log.ndc.pop(); # remove the last item from the stack
 
-
     # mdc
     $log.mdc.put('key', 'value');
 
@@ -60,7 +59,7 @@ sub MAIN() {
 ```
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/perl6-hematite/fork )
+1. Fork it ( https://github.com/[your-github-name]/raku-log/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)

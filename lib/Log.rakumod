@@ -40,8 +40,8 @@ has Log::NDC $.ndc;
 has Log::MDC $.mdc;
 
 submethod BUILD(*%args) {
-    $!level = %args{'level'} || INFO;
-    $!output = %args{'output'} || $*OUT;
+    $!level   = %args{'level'}   || INFO;
+    $!output  = %args{'output'}  || $*OUT;
     $!pattern = %args{'pattern'} || '[%d][%c] %m%n';
 
     $!ndc = %args{'ndc'} || Log::NDC.new;
@@ -58,10 +58,7 @@ multi method FALLBACK(Str $name where /^is\-.+$/, |args) {
     my $lvl = ($name ~~ /^is\-(.+)$/)[0].Str;
     $lvl = self!get-level($lvl);
 
-    if ($lvl.value <= self.level.value) {
-        return True;
-    }
-
+    return True if $lvl.value <= self.level.value;
     return False;
 }
 
@@ -88,9 +85,7 @@ method !get-level(Str $level is copy) {
 
 method !log(Str $level, Str $message) {
     my $lvl = self!get-level($level);
-    if ($lvl.value > self.level.value) {
-        return self;
-    }
+    return self if $lvl.value > self.level.value;
 
     # build log message
     my $output = self.pattern;
