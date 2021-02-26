@@ -2,15 +2,15 @@
     "perl"         : "6.d",
     "name"         : "Log",
     "license"      : "Artistic-2.0",
-    "version"      : "0.3.0",
+    "version"      : "0.3.1",
     "description"  : "A simple logging class",
     "depends"      : [ ],
     "test-depends" : [ ],
     "provides"     : {
-        "Log"            : "lib/Log.raku",
-        "Log::Exceptions": "lib/Log/Exceptions.raku",
-        "Log::NDC"       : "lib/Log/NDC.raku",
-        "Log::MDC"       : "lib/Log/MDC.raku"
+        "Log"            : "lib/Log.rakumod",
+        "Log::Exceptions": "lib/Log/Exceptions.rakumod",
+        "Log::NDC"       : "lib/Log/NDC.rakumod",
+        "Log::MDC"       : "lib/Log/MDC.rakumod"
     },
     "authors"      : [ "André Brás" ],
     "support"      : { "source"   : "https://github.com/whity/raku-log.git" }
