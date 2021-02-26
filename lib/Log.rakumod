@@ -10,14 +10,14 @@ enum Level <ERROR WARN INFO DEBUG TRACE>;
 my %Logs = ();
 my $Lock = Lock.new;
 
-multi method add(Log:U: Str $name, Log $log) returns Log {
+multi method add(Log:U: Str $name, Log $log --> Log) {
     %Logs{$name} = $log;
     return $log;
 }
 
 multi method add(Log $log) { return $?CLASS.add('main', $log); }
 
-multi method get(Log:U: Str $name) returns Log {
+multi method get(Log:U: Str $name --> Log) {
     $Lock.protect({
         if (!%Logs{$name} && $name eq 'main') {
             $?CLASS.add($name, $?CLASS.new);

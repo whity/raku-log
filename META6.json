@@ -2,7 +2,7 @@
     "perl"         : "6.d",
     "name"         : "Log",
     "license"      : "Artistic-2.0",
-    "version"      : "0.3.1",
+    "version"      : "0.3.2",
     "description"  : "A simple logging class",
     "depends"      : [ ],
     "test-depends" : [ ],
