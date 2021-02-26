@@ -1,33 +1,33 @@
-use Log::NDC;
-use Log::MDC;
-use Log::Exceptions;
+use Logger::NDC;
+use Logger::MDC;
+use Logger::Exceptions;
 
-unit class Log;
+unit class Logger;
 
 enum Level <ERROR WARN INFO DEBUG TRACE>;
 
 # class stuff
-my %Logs = ();
-my $Lock = Lock.new;
+my %Loggers = ();
+my $Lock    = Lock.new;
 
-multi method add(Log:U: Str $name, Log $log --> Log) {
-    %Logs{$name} = $log;
+multi method add(Logger:U: Str $name, Logger $log --> Logger) {
+    %Loggers{$name} = $log;
     return $log;
 }
 
-multi method add(Log $log) { return $?CLASS.add('main', $log); }
+multi method add(Logger $log) { return $?CLASS.add('main', $log); }
 
-multi method get(Log:U: Str $name --> Log) {
+multi method get(Logger:U: Str $name --> Logger) {
     $Lock.protect({
-        if (!%Logs{$name} && $name eq 'main') {
+        if (!%Loggers{$name} && $name eq 'main') {
             $?CLASS.add($name, $?CLASS.new);
         }
     });
 
-    return %Logs{$name};
+    return %Loggers{$name};
 }
 
-multi method get(Log:U:) {
+multi method get(Logger:U:) {
     return $?CLASS.get('main');
 }
 
@@ -36,16 +36,16 @@ multi method get(Log:U:) {
 has Level $.level is rw;
 has IO::Handle $.output;
 has Str $.pattern;
-has Log::NDC $.ndc;
-has Log::MDC $.mdc;
+has Logger::NDC $.ndc;
+has Logger::MDC $.mdc;
 
 submethod BUILD(*%args) {
     $!level   = %args{'level'}   || INFO;
     $!output  = %args{'output'}  || $*OUT;
     $!pattern = %args{'pattern'} || '[%d][%c] %m%n';
 
-    $!ndc = %args{'ndc'} || Log::NDC.new;
-    $!mdc = %args{'mdc'} || Log::MDC.new;
+    $!ndc = %args{'ndc'} || Logger::NDC.new;
+    $!mdc = %args{'mdc'} || Logger::MDC.new;
 
     return self;
 }
@@ -67,8 +67,8 @@ method clone() {
         level   => self.level,
         pattern => self.pattern,
         output  => self.output,
-        ndc     => Log::NDC.new(|self.ndc.Array),
-        mdc     => Log::MDC.new(|self.mdc.Hash),
+        ndc     => Logger::NDC.new(|self.ndc.Array),
+        mdc     => Logger::MDC.new(|self.mdc.Hash),
     );
 }
 
@@ -80,7 +80,7 @@ method !get-level(Str $level is copy) {
     }
 
     # throw exception "InvalidLogLevel"
-    X::Log::InvalidLevelException.new(level => $level).throw;
+    X::Logger::InvalidLevelException.new(level => $level).throw;
 }
 
 method !log(Str $level, Str $message) {

@@ -1,9 +1,9 @@
 use v6;
 
 use Test;
-use Log;
+use Logger;
 
-my $log   = Log.new;
+my $log   = Logger.new;
 $log.ndc.push('dummy');
 $log.mdc.put('dummy', 1.Str);
 

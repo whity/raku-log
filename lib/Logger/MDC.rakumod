@@ -1,6 +1,6 @@
-unit class Log::MDC;
+unit class Logger::MDC;
 
-my Log::MDC $instance;
+my Logger::MDC $instance;
 
 has Str %!map;
 

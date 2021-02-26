@@ -1,4 +1,4 @@
-unit class Log::NDC;
+unit class Logger::NDC;
 
 has @!stack = ();
 

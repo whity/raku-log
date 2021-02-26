@@ -1,16 +1,18 @@
-# Log
+# Logger
 
-A simple logging class in perl6.
+[![Build Status](https://travis-ci.org/whity/raku-log.svg?branch=master)](https://travis-ci.org/whity/raku-log)
+
+A simple logging class in raku.
 
 ## Usage
 
-```perl6
-use Log;
+```raku
+use Logger;
 
 sub MAIN() {
-    my $log = Log.new;
+    my $log = Logger.new;
     # by default the log level is INFO and the output is $*OUT (can be any IO::Handle)
-    # Log.new(level => Log::DEBUG, output => $*ERR)
+    # Logger.new(level => Logger::DEBUG, output => $*ERR)
 
     # log a message
     $log.trace('trace message');
@@ -27,7 +29,7 @@ sub MAIN() {
     $log.mdc.put('key', 'value');
 
     # change the level
-    $log.level = Log::DEBUG;
+    $log.level = Logger::DEBUG;
     $log.debug('debug message');
 
     # checking the current log level
@@ -47,12 +49,12 @@ sub MAIN() {
     $log.info('test');
 
     # register log object to use in other places
-    Log.add('log-name', Log.new);
-    #Log.add(Log.new) # register the log object as 'main'
+    Logger.add('log-name', Logger.new);
+    #Log.add(Logger.new) # register the log object as 'main'
 
     # get a registered log object
-    my $rlog = Log.get('log-name');
-    #my $rlog = Log.get; returns the log object 'main'
+    my $rlog = Logger.get('log-name');
+    #my $rlog = Logger.get; returns the log object 'main'
 
     $rlog.info('from "log-name"');
 }

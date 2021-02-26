@@ -1,4 +1,4 @@
-class X::Log::InvalidLevelException is Exception {
+class X::Logger::InvalidLevelException is Exception {
     has Str $.level;
 
     method message(--> Str) {

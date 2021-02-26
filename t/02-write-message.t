@@ -1,7 +1,7 @@
 use v6;
 
 use Test;
-use Log;
+use Logger;
 
 class Handle is IO::Handle {
     has Str $!message;
@@ -13,7 +13,7 @@ class Handle is IO::Handle {
     }
 }
 
-my $log = Log.new(output => Handle.new);
+my $log = Logger.new(output => Handle.new);
 
 # write message
 my $msg = 'info test message';
@@ -26,6 +26,6 @@ $log.trace($msg);
 unlike($log.output.get, /$msg/, 'message not in the log');
 
 # try to write a invalid level
-throws-like({ $log.tracerr($msg) }, X::Log::InvalidLevelException);
+throws-like({ $log.tracerr($msg) }, X::Logger::InvalidLevelException);
 
 done-testing;

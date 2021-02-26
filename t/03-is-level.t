@@ -1,9 +1,9 @@
 use v6;
 
 use Test;
-use Log;
+use Logger;
 
-my $log = Log.new;
+my $log = Logger.new;
 
 ok($log.is-warn, 'log is warning');
 ok($log.is-error, 'log is error');
