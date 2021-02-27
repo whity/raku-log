@@ -1,7 +1,5 @@
 unit class Logger::MDC;
 
-my Logger::MDC $instance;
-
 has Str %!map;
 
 method new(*%elements) {

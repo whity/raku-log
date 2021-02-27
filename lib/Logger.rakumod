@@ -75,9 +75,7 @@ method clone() {
 method !get-level(Str $level is copy) {
     $level = $level.uc;
     my $exists = Level.enums.first({ .key eq $level });
-    if ($exists) {
-        return $exists;
-    }
+    return $exists if $exists;
 
     # throw exception "InvalidLogLevel"
     X::Logger::InvalidLevelException.new(level => $level).throw;

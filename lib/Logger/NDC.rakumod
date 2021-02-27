@@ -16,18 +16,12 @@ method push(Str $value) {
 }
 
 method pop() {
-    if (@!stack.elems > 0) {
-        @!stack.pop;
-    }
-
+    @!stack.pop if @!stack.elems;
     return self;
 }
 
 method get() {
-    if (@!stack.elems == 0) {
-        return 'undef';
-    }
-
+    return 'undef' if !@!stack.elems;
     return @!stack.join(q{ });
 }
 
