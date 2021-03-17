@@ -1,5 +1,8 @@
 language: perl6
 perl6:
     - latest
+install:
+    - rakudobrew build zef
+    - zef install --deps-only . --force-test
 script:
-    - PERL6LIB=lib prove -v -r --exec=raku t/
+    - ./run-tests
