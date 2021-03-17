@@ -1,7 +1,5 @@
 # Logger
 
-[![Build Status](https://travis-ci.com/whity/raku-log.svg?branch=master)](https://travis-ci.com/whity/raku-log)
-
 A simple logging class in raku.
 
 ## Usage
