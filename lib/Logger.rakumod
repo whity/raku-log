@@ -34,8 +34,8 @@ multi method get(Logger:U:) {
 # instance stuff
 
 has Level $.level is rw;
+has Str $.pattern is rw;
 has IO::Handle $.output;
-has Str $.pattern;
 has Logger::NDC $.ndc;
 has Logger::MDC $.mdc;
 
