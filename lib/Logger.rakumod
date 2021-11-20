@@ -38,13 +38,13 @@ has Str $.pattern is rw;
 has IO::Handle $.output;
 has Logger::NDC $.ndc;
 has Logger::MDC $.mdc;
-has &.formatter is rw = sub ($self) { DateTime.now.Str; };
+has &.dt-formatter is rw = sub ($self) { DateTime.now.Str; };
 
 submethod BUILD(*%args) {
-    $!level     = %args{'level'}   || INFO;
-    $!output    = %args{'output'}  || $*OUT;
-    $!pattern   = %args{'pattern'} || '[%d][%c] %m%n';
-    &!formatter = %args{'formatter'} if %args{'formatter'}.defined;
+    $!level        = %args{'level'}   || INFO;
+    $!output       = %args{'output'}  || $*OUT;
+    $!pattern      = %args{'pattern'} || '[%d][%c] %m%n';
+    &!dt-formatter = %args{'dt-formatter'} if %args{'dt-formatter'}.defined;
 
     $!ndc = %args{'ndc'} || Logger::NDC.new;
     $!mdc = %args{'mdc'} || Logger::MDC.new;
@@ -99,7 +99,7 @@ method !log(Str $level, Str $message) {
     $output = $replace_placeholder($output, '%m', $message);
 
     # replace %d
-    $output = $replace_placeholder($output, '%d', DateTime.now(formatter => &!formatter).Str);
+    $output = $replace_placeholder($output, '%d', DateTime.now(formatter => &!dt-formatter).Str);
 
     # replace %c - level
     $output = $replace_placeholder($output, '%c', $level);

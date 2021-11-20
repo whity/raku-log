@@ -23,7 +23,7 @@ class Handle is IO::Handle {
 
 {
     my &formatter = -> $dt { sprintf "%sT%s", .dd-mm-yyyy, .hh-mm-ss given $dt };
-    my $log = Logger.new(output => Handle.new, formatter => &formatter);
+    my $log = Logger.new(output => Handle.new, dt-formatter => &formatter);
 
     my $msg = 'test message';
     $log.info($msg);
