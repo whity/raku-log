@@ -55,6 +55,10 @@ sub MAIN() {
     #my $rlog = Logger.get; returns the log object 'main'
 
     $rlog.info('from "log-name"');
+
+    # Set a formatter for the datetime
+    my $log = Logger.new(dt-formatter => -> $dt { sprintf "%sT%s", .dd-mm-yyyy, .hh-mm-ss given $dt)});
+    $log.info('test'); # prints: [20-11-2021T18:31:44][INFO] test
 }
 ```
 ## Contributing
