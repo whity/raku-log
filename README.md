@@ -2,6 +2,8 @@
 
 A simple logging class in raku.
 
+[![test](https://github.com/whity/raku-log/actions/workflows/test.yml/badge.svg)](https://github.com/whity/raku-log/actions/workflows/test.yml)
+
 ## Usage
 
 ```raku
