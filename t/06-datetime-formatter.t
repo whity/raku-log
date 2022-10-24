@@ -18,7 +18,11 @@ class Handle is IO::Handle {
 
     my $msg = 'test message';
     $log.info($msg);
-    like($log.output.get, /^ '[' \d+ '-' \d+ '-' \d+ 'T' \d+ ':' \d+ ':' \d+ '.' \d+ 'Z'? ']'/, 'standard timestamp');
+    like(
+        $log.output.get,
+        /^ '[' \d+ '-' \d+ '-' \d+ 'T' \d+ ':' \d+ ':' \d+ '.' \d+ ('Z'|'+' \d ** 2 ':' \d ** 2)? ']'/,
+        'standard timestamp'
+    );
 }
 
 {
