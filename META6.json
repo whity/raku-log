@@ -3,6 +3,7 @@
     "name"         : "Logger",
     "license"      : "Artistic-2.0",
     "version"      : "0.4.6",
+    "auth"         : "zef:whity",
     "description"  : "A simple logging class",
     "depends"      : [ ],
     "test-depends" : [ ],
